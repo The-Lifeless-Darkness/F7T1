@@ -42,20 +42,28 @@ class MainWindow(QMainWindow):
                 delta -= 1
 
         elif event.key() == Qt.Key_Right:
-            if toponym_longitude < 179:
-                toponym_longitude += 1
+            toponym_longitude += 0.05 * (21 / (delta if delta != 0 else 1))
+
+            if toponym_longitude > 179.4:
+                toponym_longitude = 179.4
 
         elif event.key() == Qt.Key_Left:
-            if toponym_longitude > 1:
-                toponym_longitude -= 1
+            toponym_longitude -= 0.05 * (21 / (delta if delta != 0 else 1))
+
+            if toponym_longitude < -179.4:
+                toponym_longitude = -179.4
 
         elif event.key() == Qt.Key_Up:
-            if toponym_longitude < 89:
-                toponym_lattitude += 1
+            toponym_lattitude += 0.05 * (21 / (delta if delta != 0 else 1))
+
+            if toponym_lattitude > 89.4:
+                toponym_lattitude = 89.4
 
         elif event.key() == Qt.Key_Down:
-            if toponym_longitude > 1:
-                toponym_lattitude -= 1
+            toponym_lattitude -= 0.05 * (21 / (delta if delta != 0 else 1))
+
+            if toponym_lattitude < -89.4:
+                toponym_lattitude = -89.4
         else:
             return
 
