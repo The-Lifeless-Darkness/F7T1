@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def keyPressEvent(self, event):
-        global delta
+        global delta, toponym_longitude, toponym_lattitude
 
         # Handle PgUp key press
         if event.key() == Qt.Key_PageUp:
@@ -40,6 +40,24 @@ class MainWindow(QMainWindow):
         elif event.key() == Qt.Key_PageDown:
             if delta > delta_min:
                 delta -= 1
+
+        elif event.key() == Qt.Key_Right:
+            if toponym_longitude < 179:
+                toponym_longitude += 1
+
+        elif event.key() == Qt.Key_Left:
+            if toponym_longitude > 1:
+                toponym_longitude -= 1
+
+        elif event.key() == Qt.Key_Up:
+            if toponym_longitude < 89:
+                toponym_lattitude += 1
+
+        elif event.key() == Qt.Key_Down:
+            if toponym_longitude > 1:
+                toponym_lattitude -= 1
+        else:
+            return
 
         self.redrawImage()
 
